@@ -18,3 +18,10 @@ Demo Visualization Feature in D3.js
    ```sh 
    npm start
    ```
+# Demo
+## Scatter Plot Chart
+   ![Image Description](img_demo/scatter_plot.jpeg)
+## Bar Chart
+   ![Image Description](img_demo/bar_chart.jpeg)
+## Box Plot Chart
+   ![Image Description](img_demo/box_plot.jpeg)
