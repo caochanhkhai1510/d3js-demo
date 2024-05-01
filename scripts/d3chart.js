@@ -66,7 +66,6 @@ function createScatterPlot(data) {
         .append('svg')
         .attr('width', width)
         .attr('height', height)
-        .style('border', '1px solid red') 
         .append('g')
         .attr('transform', `translate(${(width - innerWidth) / 2},${(height - innerHeight) / 2})`);
 
@@ -187,7 +186,6 @@ function createBarChart(data) {
         .append('svg')
         .attr('width', width)
         .attr('height', height)
-        .style('border', '1px solid red')
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -351,7 +349,6 @@ function createBoxPlot(data) {
         .append('svg')
         .attr('width', width)
         .attr('height', height)
-        .style('border', '1px solid red') 
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
         
