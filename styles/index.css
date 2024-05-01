@@ -1,7 +1,16 @@
 body {
-  background-color: #FAFAFA;
+  font-family: Arial, sans-serif;
+}
+#scatter-plot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-svg {
-  background-color: #FAFAFA;
+#bar-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

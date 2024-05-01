@@ -8,7 +8,6 @@ yarn-error.log*
 
 
 # TypeScript compiled files
-scripts/*.js
 scripts/*.js.map
 
 # Development tools
