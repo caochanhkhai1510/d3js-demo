@@ -1,2 +1,2 @@
 # d3js-demo
-Demo about Visualization Freatures in D3.js
+Demo about Visualization Features in D3.js
