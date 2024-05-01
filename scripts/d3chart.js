@@ -1,3 +1,5 @@
+
+
 function aggregateData(data) {
     const alcoholGroups = d3.group(data, d => d.alcoholConsumption);
     return Array.from(alcoholGroups, ([alcoholConsumption, values]) => ({
@@ -55,7 +57,7 @@ function createScatterPlot(data) {
     }).flat();
 
     const width = 900
-    const height = 750
+    const height = 600
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -176,7 +178,7 @@ function createScatterPlot(data) {
 }
 function createBarChart(data) {
     const width = 900;
-    const height = 750;
+    const height = 600;
     const margin = { top: 50, right: 50, bottom: 100, left: 80 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -340,7 +342,7 @@ function createBarChart(data) {
 
 function createBoxPlot(data) {
     const width = 900;
-    const height = 750;
+    const height = 600;
     const margin = { top: 100, right: 50, bottom: 100, left: 80 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -513,5 +515,38 @@ function createBoxPlot(data) {
         .style('padding', '10px')
         .style('font-family', 'Arial, sans-serif')
         .style('font-size', '14px');
+
+        const legend = svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(500, 450)`); // Position the legend within the image
+
+        legend.append('rect')
+            .attr('x', 20)  // Adjust the x position as needed
+            .attr('y', -150)  // Adjust the y position as needed
+            .attr('width', 250)  // Adjust the width to fit the text
+            .attr('height', 70)  // Adjust the height to fit the text
+            .attr('fill', 'white')
+            .attr('stroke', 'black')
+            .attr('stroke-width', 1)
+            .attr('rx', 5)  // Add rounded corners
+            .attr('ry', 5);
+
+        legend.append('text')
+            .attr('x', 30)
+            .attr('y', -130)
+            .text('Median: 50th percentile')
+            .style('font-size', '12px');
+
+        legend.append('text')
+            .attr('x', 30)
+            .attr('y', -110)
+            .text('IQR: 25th to 75th percentile')
+            .style('font-size', '12px');
+
+        legend.append('text')
+            .attr('x', 30)
+            .attr('y', -90)
+            .text('Outliers: < Q1 - 1.5 IQR or > Q3 + 1.5 IQR')
+            .style('font-size', '12px');
 
 }

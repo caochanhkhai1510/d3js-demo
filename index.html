@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Sleep Efficiency Visualization</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>  
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/index.css">
 </head>
 <body>
-    <h1>Scatter Plot</h1>
-    <div id="scatter-plot" class="chart"></div> 
-    <h1>Bar Chart</h1>
-    <div id="bar-chart" class="chart"></div>
-    <h1> Box Plot Chart</h1>
-    <div id="box-plot" class="chart"></div>
-    <script src="scripts/d3chart.js"></script>
+    <nav>
+        <ul>
+            <li><a href="#scatter-plot">Scatter Plot</a></li>
+            <li><a href="#bar-chart">Bar Chart</a></li>
+            <li><a href="#box-plot">Box Plot</a></li>
+        </ul>
+    </nav>
 
+    <div id="scatter-plot" class="chart">
+        <h3>Sleep Efficiency by Age and Gender</h>
+        <!-- Scatter plot chart container -->
+    </div>
+
+    <div id="bar-chart" class="chart">
+        <h3>Effect of Alcohol Consumption on Sleep Quality</h3>
+        <!-- Bar chart container -->
+    </div>
+
+    <div id="box-plot" class="chart">
+        <h3>Sleep Duration Distribution by Age Group</h3>
+        <!-- Box plot chart container -->
+    </div>
+
+    <script src="scripts/d3chart.js"></script>
 </body>
 </html>

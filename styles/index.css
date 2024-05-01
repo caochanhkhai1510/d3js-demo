@@ -1,7 +1,82 @@
-body {
-  font-family: Arial, sans-serif;
+/* Basic Reset */
+body, h1, h2, p, ul {
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+nav {
+  background: #750092;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.chart {
+  background: #fff;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.chart h3 {
+  color: #333;
+  font-size: 20px; /* Larger font size for the title */
+  padding-bottom: 10px; /* Space below the title */
+  text-align: center; /* Center align the title */
+}
+
+.chart p {
+  font-size: 16px; /* Appropriate font size for the description */
+  color: #666; /* A lighter text color for the description */
+  text-align: center; /* Center align the description */
+  padding-bottom: 20px; /* Space below the description before the chart begins */
+}
+
+/* Ensure the SVG fills the container but respects the padding for text */
+.chart svg {
+  display: block; /* Block display to fill the width */
+  margin: auto; /* Center align the SVG if it doesn't naturally fill the width */
+}
+
+@media (max-width: 600px) {
+  nav ul li {
+      display: block;
+      text-align: center;
+  }
+
+  nav ul li a {
+      display: block;
+      padding: 10px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
 .axis-label {
   font-size: 14px;
 }
@@ -19,19 +94,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto; /* Thay đổi để tự động điều chỉnh chiều cao */
+  margin-bottom: 40px; /* Thêm khoảng cách dưới */
 }
 
 #bar-chart {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto; /* Thay đổi để tự động điều chỉnh chiều cao */
+  margin-bottom: 40px; /* Thêm khoảng cách dưới */
 }
 
 #box-plot {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto; /* Thay đổi để tự động điều chỉnh chiều cao */
+  margin-bottom: 40px; /* Thêm khoảng cách dưới */
 }
