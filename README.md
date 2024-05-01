@@ -16,5 +16,5 @@ Demo Visualization Feature in D3.js
    ```
 4. Run the project
    ```sh 
-   npm run
+   npm run start
    ```

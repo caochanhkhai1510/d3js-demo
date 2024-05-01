@@ -1,9 +1,26 @@
+function binAges(data) {
+    const binSize = 10; // You can adjust the bin size
+    data.forEach(d => {
+        d.ageBin = Math.floor(d.age / binSize) * binSize;
+    });
+    return data;
+}
+
+function aggregateData(data) {
+    const ageBins = d3.group(data, d => d.ageBin);
+    return Array.from(ageBins, ([ageBin, values]) => ({
+        ageBin,
+        sleepEfficiency: d3.mean(values, d => d.sleepEfficiency)
+    }));
+}
+
+
 d3.csv('data/Sleep_Efficiency.csv').then(data => {
     const parsedData = data.map(d => ({
         id: +d.ID,
         age: +d.Age,
         gender: d.Gender,
-        sleepEfficiency: (+(d['Sleep efficiency'] * 100).toFixed(2)),
+        sleepEfficiency: parseFloat((d['Sleep efficiency'] * 100).toFixed(2)),
         remSleep: +d['REM sleep percentage'],
         deepSleep: +d['Deep sleep percentage'],
         lightSleep: +d['Light sleep percentage'],
@@ -12,9 +29,10 @@ d3.csv('data/Sleep_Efficiency.csv').then(data => {
         smokingStatus: d['Smoking status'] === 'Yes',
         exerciseFrequency: +d['Exercise frequency'] || 0
     }));
-
     createScatterPlot(parsedData);
-    // createBarChart(parsedData, 'gender');
+    const binnedData = binAges(parsedData);
+    const aggregatedData = aggregateData(binnedData);
+    createBarChart(aggregatedData);
 });
 
 function createScatterPlot(data) {
@@ -127,3 +145,72 @@ function createScatterPlot(data) {
                 .attr('text-anchor', 'start');
         });
 }
+
+function createBarChart(data) {
+    const width = 900;
+    const height = 600;
+    const margin = { top: 50, right: 50, bottom: 100, left: 80 }; // Increased bottom margin for labels
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+
+    const svg = d3.select('#bar-chart')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .style('border', '1px solid red')
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const xScale = d3.scaleBand()
+        .domain(data.map(d => d.ageBin).sort((a, b) => a - b)) // Sort age bins in ascending order
+        .range([0, innerWidth])
+        .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.sleepEfficiency)])
+        .range([innerHeight, 0]);
+
+    const xAxis = d3.axisBottom(xScale).tickFormat(d => `${d} - ${d+9}`);
+    const yAxis = d3.axisLeft(yScale);
+
+    svg.append('g')
+        .attr('transform', `translate(0,${innerHeight})`)
+        .call(xAxis)
+        .selectAll('text')
+        .attr('transform', 'rotate(-45)')
+        .style('text-anchor', 'end');
+        
+
+    svg.append('g')
+        .call(yAxis);
+
+    svg.selectAll('.bar')
+        .data(data)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('x', d => xScale(d.ageBin))
+        .attr('y', d => yScale(d.sleepEfficiency))
+        .attr('width', xScale.bandwidth())
+        .attr('height', d => innerHeight - yScale(d.sleepEfficiency))
+        .attr('fill', 'steelblue');
+
+    // Adding a legend
+    const legend = svg.append('g')
+        .attr('transform', `translate(10, 0)`); // Position the legend in the upper right corner
+
+    legend.append('rect')
+        .attr('width', 18)
+        .attr('height', 18)
+        .style('fill', 'steelblue');
+
+    legend.append('text')
+        .attr('x', 24)
+        .attr('y', 9)
+        .attr('dy', '0.35em')
+        .text('Sleep Efficiency')
+        .style('text-anchor', 'start');
+}
+
+
+
